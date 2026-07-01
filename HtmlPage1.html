@@ -1,0 +1,903 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clothify Studio – Ultra‑Modern Designer</title>
+
+<style>
+:root {
+    --bg: radial-gradient(circle at top, #f5f7ff 0, #dde3ff 40%, #c7d0ff 70%, #b0b9ff 100%);
+    --glass: rgba(255,255,255,0.18);
+    --glass-strong: rgba(255,255,255,0.32);
+    --border-glass: rgba(255,255,255,0.7);
+    --shadow-soft: 0 24px 60px rgba(15,23,42,0.25);
+    --primary: #4a6cf7;
+    --primary-soft: rgba(74,108,247,0.18);
+    --danger: #ff4b6a;
+    --text-main: #0f172a;
+    --text-soft: #64748b;
+    --radius-xl: 26px;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 48px;
+}
+
+.app-shell {
+    width: min(1200px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.35));
+    box-shadow: 0 18px 40px rgba(15,23,42,0.18);
+    backdrop-filter: blur(26px);
+    border: 1px solid rgba(255,255,255,0.8);
+}
+.logo {
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.logo span {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 20%, #ffffff, #4a6cf7);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.7);
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text-soft);
+}
+.header-right button {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(18px);
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-main);
+}
+.header-right button:hover { background: rgba(255,255,255,0.8); }
+
+/* Glass card */
+.glass-card {
+    background: var(--glass);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-glass);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(30px);
+    padding: 22px 24px;
+}
+
+/* Auth & Profile */
+.auth-profile-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 20px;
+}
+.auth-tabs {
+    display: inline-flex;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,0.7);
+    margin-bottom: 16px;
+}
+.auth-tabs button {
+    border: none;
+    background: transparent;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text-soft);
+}
+.auth-tabs button.active {
+    background: rgba(74,108,247,0.12);
+    color: var(--text-main);
+    font-weight: 600;
+}
+.auth-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+input[type="text"], input[type="email"] {
+    padding: 10px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(148,163,184,0.5);
+    background: rgba(255,255,255,0.7);
+    outline: none;
+    font-size: 13px;
+}
+input[type="text"]:focus, input[type="email"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary-soft);
+}
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+/* Designer */
+.designer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+    gap: 24px;
+    align-items: stretch;
+}
+.canvas-area {
+    padding: 16px;
+    border-radius: var(--radius-lg);
+    background: radial-gradient(circle at top, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+    box-shadow: inset 0 0 0 1px rgba(148,163,184,0.25);
+}
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+}
+label {
+    font-weight: 500;
+    color: var(--text-soft);
+}
+input[type="color"], select {
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(148,163,184,0.5);
+    background: rgba(255,255,255,0.7);
+    outline: none;
+    font-size: 13px;
+}
+select:focus, input[type="color"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary-soft);
+}
+
+/* Preset colors */
+.color-palette {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+}
+.color-swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.9);
+    box-shadow: 0 0 0 1px rgba(148,163,184,0.4);
+    cursor: pointer;
+}
+
+/* Buttons */
+.btn-primary, .btn-ghost, .btn-danger {
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.btn-primary {
+    background: linear-gradient(135deg, #4a6cf7, #7b5cff);
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(74,108,247,0.45);
+}
+.btn-primary:hover { filter: brightness(1.05); }
+.btn-ghost {
+    background: rgba(255,255,255,0.7);
+    color: var(--text-main);
+    border: 1px solid rgba(148,163,184,0.5);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.95); }
+.btn-danger {
+    background: linear-gradient(135deg, #ff4b6a, #ff7b8f);
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(255,75,106,0.45);
+}
+
+/* Store & Cart */
+.store-cart-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+    gap: 24px;
+}
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.product {
+    width: 190px;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 14px 30px rgba(15,23,42,0.12);
+    border: 1px solid rgba(148,163,184,0.25);
+    text-align: center;
+    font-size: 13px;
+}
+.product img {
+    width: 120px;
+    border-radius: 16px;
+    margin-bottom: 6px;
+}
+
+/* Cart */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.9);
+    padding: 8px 10px;
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    border: 1px solid rgba(148,163,184,0.25);
+    font-size: 13px;
+}
+.cart-item img {
+    width: 42px;
+    border-radius: 12px;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(15,23,42,0.55), rgba(15,23,42,0.85));
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+.modal-content {
+    width: 360px;
+    background: rgba(255,255,255,0.9);
+    border-radius: var(--radius-xl);
+    padding: 22px 22px 18px;
+    box-shadow: 0 26px 60px rgba(0,0,0,0.45);
+    backdrop-filter: blur(26px);
+}
+.modal-content h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+.modal-content input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Titles */
+.card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.card-sub {
+    font-size: 12px;
+    color: var(--text-soft);
+}
+</style>
+</head>
+
+<body>
+<div class="app-shell">
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="logo">
+            <span></span>
+            CLOTHIFY STUDIO
+        </div>
+        <div class="header-right">
+            <span id="headerUserLabel">Guest</span>
+            <button onclick="scrollToDesigner()">Designer</button>
+            <button onclick="scrollToStore()">Store</button>
+        </div>
+    </header>
+
+    <!-- Auth + Profile -->
+    <section class="auth-profile-grid">
+        <div class="glass-card" id="authContainer">
+            <div class="card-title">Account</div>
+            <div class="card-sub">Sign in or create an account to sync your designs and orders.</div>
+
+            <div class="auth-tabs">
+                <button id="tabLogin" class="active">Login</button>
+                <button id="tabSignup">Sign Up</button>
+            </div>
+
+            <div class="auth-fields" id="loginForm">
+                <input id="loginEmail" type="email" placeholder="Email">
+                <button class="btn-primary" onclick="login()">Login</button>
+            </div>
+
+            <div class="auth-fields" id="signupForm" style="display:none;">
+                <input id="signupName" type="text" placeholder="Name">
+                <input id="signupEmail" type="email" placeholder="Email">
+                <button class="btn-primary" onclick="signup()">Create Account</button>
+            </div>
+        </div>
+
+        <div class="glass-card" id="profileBox" style="display:none;">
+            <div class="card-title">Profile</div>
+            <div class="card-sub">Your activity across designs and orders.</div>
+            <div class="profile-row">
+                <span>Name</span><span id="profileName"></span>
+            </div>
+            <div class="profile-row">
+                <span>Email</span><span id="profileEmail"></span>
+            </div>
+            <div class="profile-row">
+                <span>Designs Saved</span><span id="profileDesigns"></span>
+            </div>
+            <div class="profile-row">
+                <span>Orders Completed</span><span id="profileOrders"></span>
+            </div>
+            <button class="btn-danger" onclick="logout()">Logout</button>
+        </div>
+    </section>
+
+    <!-- Designer -->
+    <section class="glass-card" id="designerSection">
+        <div class="designer-grid">
+            <div class="canvas-area">
+                <canvas id="shirtCanvas" width="420" height="480"></canvas>
+            </div>
+
+            <div class="controls">
+                <div class="section-title">Design Controls</div>
+
+                <div class="control-group">
+                    <label>Fabric Color</label>
+                    <input type="color" id="shirtColor" value="#4a6cf7">
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background:#000000" onclick="setPresetColor('#000000')"></div>
+                        <div class="color-swatch" style="background:#ffffff" onclick="setPresetColor('#ffffff')"></div>
+                        <div class="color-swatch" style="background:#ff4b6a" onclick="setPresetColor('#ff4b6a')"></div>
+                        <div class="color-swatch" style="background:#22c55e" onclick="setPresetColor('#22c55e')"></div>
+                        <div class="color-swatch" style="background:#0ea5e9" onclick="setPresetColor('#0ea5e9')"></div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Custom Text</label>
+                    <input type="text" id="shirtText" value="Dev 2026">
+                </div>
+
+                <div class="control-group">
+                    <label>Text Color</label>
+                    <input type="color" id="textColor" value="#ffffff">
+                </div>
+
+                <div class="control-group">
+                    <label>Center Logo</label>
+                    <select id="graphicSelect">
+                        <option value="none">None</option>
+                        <option value="⭐️">Star</option>
+                        <option value="🔥">Fire</option>
+                        <option value="🚀">Rocket</option>
+                        <option value="❤️">Heart</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Texture Layer</label>
+                    <select id="textureSelect">
+                        <option value="none">None</option>
+                        <option value="dots">Dots</option>
+                        <option value="stripes">Stripes</option>
+                        <option value="grid">Grid</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Shirt Type</label>
+                    <select id="shirtType">
+                        <option value="tshirt">T‑Shirt ($25)</option>
+                        <option value="hoodie">Hoodie ($40)</option>
+                        <option value="jacket">Jacket ($55)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+    <label>Shirt Scale</label>
+    <input type="range" id="shirtScale" min="0.8" max="1.4" step="0.01" value="1.15">
+</div>
+
+<div class="control-group">
+    <label>Neck Style</label>
+    <select id="neckStyle">
+        <option value="round">Round Neck</option>
+        <option value="vneck">V‑Neck</option>
+        <option value="hoodie">Hoodie Neck</option>
+    </select>
+</div>
+
+<div class="control-group">
+    <label>Sleeve Type</label>
+    <select id="sleeveType">
+        <option value="long">Long Sleeve</option>
+        <option value="half">Half Sleeve</option>
+        <option value="none">Sleeveless</option>
+    </select>
+</div>
+
+                <div class="control-group">
+                    <label>Size</label>
+                    <select id="shirtSize">
+                        <option value="S">S</option>
+                        <option value="M" selected>M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </div>
+
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+                    <button class="btn-primary" id="saveDesignBtn">Save to Store</button>
+                    <button class="btn-ghost" onclick="downloadPNG()">Download PNG</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store + Cart -->
+    <section class="store-cart-grid">
+        <div class="glass-card" id="storeSection">
+            <div class="card-title">Store</div>
+            <div class="card-sub">Your saved designs, ready to add to cart.</div>
+            <div id="productList" class="product-list"></div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title">Cart</div>
+            <div class="card-sub">Review your items before checkout.</div>
+            <div id="cartItems"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+                <span style="font-size:13px; color:var(--text-soft);">Total</span>
+                <span style="font-size:16px; font-weight:600;">$<span id="cartTotal">0.00</span></span>
+            </div>
+            <div style="margin-top:12px;">
+                <button class="btn-primary" onclick="openCheckout()">Checkout</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal" id="checkoutModal">
+    <div class="modal-content">
+        <h2>Checkout</h2>
+        <p style="font-size:12px; color:var(--text-soft); margin-bottom:8px;">
+            Complete your order securely. This is a demo checkout.
+        </p>
+        <input id="checkoutName" type="text" placeholder="Full Name">
+        <input id="checkoutCard" type="text" placeholder="Card Number">
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:6px;">
+            <button class="btn-ghost" onclick="closeCheckout()">Cancel</button>
+            <button class="btn-primary" onclick="completeOrder()">Pay Now</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* Smooth scroll */
+    function scrollToDesigner() {
+        document.getElementById("designerSection").scrollIntoView({ behavior: "smooth" });
+    }
+    function scrollToStore() {
+        document.getElementById("storeSection").scrollIntoView({ behavior: "smooth" });
+    }
+
+    /* Auth & Profile */
+    let user = JSON.parse(localStorage.getItem("user")) || null;
+    let stats = JSON.parse(localStorage.getItem("stats")) || { designs: 0, orders: 0 };
+
+const authContainer = document.getElementById("authContainer");
+const profileBox = document.getElementById("profileBox");
+const loginForm = document.getElementById("loginForm");
+const signupForm = document.getElementById("signupForm");
+const tabLogin = document.getElementById("tabLogin");
+const tabSignup = document.getElementById("tabSignup");
+const headerUserLabel = document.getElementById("headerUserLabel");
+
+    tabLogin.onclick = () => {
+        tabLogin.classList.add("active");
+    tabSignup.classList.remove("active");
+    loginForm.style.display = "flex";
+    signupForm.style.display = "none";
+    };
+    tabSignup.onclick = () => {
+        tabSignup.classList.add("active");
+    tabLogin.classList.remove("active");
+    loginForm.style.display = "none";
+    signupForm.style.display = "flex";
+    };
+
+    function updateProfileUI() {
+        if (user) {
+            authContainer.style.display = "none";
+            profileBox.style.display = "block";
+            document.getElementById("profileName").textContent = user.name || "";
+            document.getElementById("profileEmail").textContent = user.email || "";
+            document.getElementById("profileDesigns").textContent = stats.designs;
+            document.getElementById("profileOrders").textContent = stats.orders;
+            headerUserLabel.textContent = user.name || user.email;
+        } else {
+            authContainer.style.display = "block";
+            profileBox.style.display = "none";
+            headerUserLabel.textContent = "Guest";
+        }
+    }
+
+    function signup() {
+        const name = document.getElementById("signupName").value.trim();
+        const email = document.getElementById("signupEmail").value.trim();
+        if (!name || !email) return alert("Enter name and email");
+        user = { name, email };
+        localStorage.setItem("user", JSON.stringify(user));
+        updateProfileUI();
+    }
+
+    function login() {
+        const email = document.getElementById("loginEmail").value.trim();
+        if (!email) return alert("Enter email");
+        user = { name: email.split("@")[0], email };
+        localStorage.setItem("user", JSON.stringify(user));
+        updateProfileUI();
+    }
+
+    function logout() {
+        user = null;
+        localStorage.removeItem("user");
+        updateProfileUI();
+    }
+
+    updateProfileUI();
+
+    /* Canvas & Design */
+const canvas = document.getElementById("shirtCanvas");
+const ctx = canvas.getContext("2d");
+
+const shirtColorInput = document.getElementById("shirtColor");
+const shirtTextInput = document.getElementById("shirtText");
+const textColorInput = document.getElementById("textColor");
+const graphicSelect = document.getElementById("graphicSelect");
+const textureSelect = document.getElementById("textureSelect");
+const shirtType = document.getElementById("shirtType");
+const shirtSize = document.getElementById("shirtSize");
+
+    function setPresetColor(color) {
+        shirtColorInput.value = color;
+        drawShirt();
+    }
+
+    function drawTexture(type) {
+        ctx.globalAlpha = 0.18;
+        ctx.fillStyle = "#0f172a";
+
+        if (type === "dots") {
+            for (let x = 80; x < 340; x += 18)
+                for (let y = 120; y < 380; y += 18)
+                    ctx.fillRect(x, y, 3, 3);
+            }
+
+        if (type === "stripes") {
+            for (let y = 120; y < 380; y += 18)
+                ctx.fillRect(90, y, 240, 4);
+            }
+
+        if (type === "grid") {
+            for (let x = 90; x < 330; x += 22)
+                ctx.fillRect(x, 120, 2, 260);
+            for (let y = 120; y < 380; y += 22)
+                ctx.fillRect(90, y, 240, 2);
+            }
+
+        ctx.globalAlpha = 1;
+    }
+
+    function drawShirt() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const color = shirtColorInput.value;
+    const text = shirtTextInput.value;
+    const textColor = textColorInput.value;
+    const logo = graphicSelect.value;
+    const scale = parseFloat(document.getElementById("shirtScale").value);
+    const neck = document.getElementById("neckStyle").value;
+    const sleeve = document.getElementById("sleeveType").value;
+
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.scale(scale, scale);
+        ctx.translate(-canvas.width / 2, -canvas.height / 2);
+
+        ctx.fillStyle = color;
+        ctx.beginPath();
+
+        // --- Neck Styles ---
+        if (neck === "round") {
+            ctx.moveTo(160, 80);
+            ctx.quadraticCurveTo(210, 40, 260, 80);
+        }
+        if (neck === "vneck") {
+            ctx.moveTo(160, 80);
+            ctx.lineTo(210, 120);
+            ctx.lineTo(260, 80);
+        }
+        if (neck === "hoodie") {
+            ctx.moveTo(150, 90);
+            ctx.quadraticCurveTo(210, 40, 270, 90);
+        }
+
+        // --- Sleeves ---
+        if (sleeve === "long") {
+            ctx.lineTo(330, 130);
+            ctx.quadraticCurveTo(360, 200, 330, 260);
+            ctx.lineTo(300, 260);
+        }
+        if (sleeve === "half") {
+            ctx.lineTo(330, 130);
+            ctx.quadraticCurveTo(350, 170, 320, 200);
+            ctx.lineTo(290, 200);
+        }
+        if (sleeve === "none") {
+            ctx.lineTo(300, 130);
+            ctx.lineTo(280, 150);
+        }
+
+        // Body
+        ctx.lineTo(300, 420);
+        ctx.quadraticCurveTo(210, 460, 120, 420);
+
+        // Left sleeve
+        if (sleeve === "long") {
+            ctx.lineTo(120, 260);
+            ctx.lineTo(90, 260);
+            ctx.quadraticCurveTo(60, 200, 90, 130);
+        }
+        if (sleeve === "half") {
+            ctx.lineTo(120, 200);
+            ctx.lineTo(90, 200);
+            ctx.quadraticCurveTo(70, 160, 100, 130);
+        }
+        if (sleeve === "none") {
+            ctx.lineTo(120, 150);
+            ctx.lineTo(100, 130);
+        }
+
+        ctx.closePath();
+        ctx.fill();
+
+        // Outline
+        ctx.strokeStyle = "rgba(0,0,0,0.25)";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Light shading
+    const gradient = ctx.createLinearGradient(0, 80, 0, 420);
+        gradient.addColorStop(0, "rgba(255,255,255,0.45)");
+        gradient.addColorStop(1, "rgba(0,0,0,0.25)");
+        ctx.fillStyle = gradient;
+        ctx.globalAlpha = 0.25;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // Texture
+        if (textureSelect.value !== "none") {
+            drawTexture(textureSelect.value);
+        }
+
+        // Logo
+        if (logo !== "none") {
+            ctx.font = "60px system-ui";
+            ctx.textAlign = "center";
+            ctx.fillStyle = "rgba(0,0,0,0.85)";
+            ctx.fillText(logo, 210, 230);
+        }
+
+        // Text
+        if (text.trim() !== "") {
+            ctx.fillStyle = textColor;
+            ctx.font = "bold 26px system-ui";
+            ctx.textAlign = "center";
+            ctx.fillText(text, 210, 300);
+        }
+
+        ctx.restore();
+    }
+
+    document.getElementById("shirtScale").addEventListener("input", drawShirt);
+    document.getElementById("neckStyle").addEventListener("change", drawShirt);
+    document.getElementById("sleeveType").addEventListener("change", drawShirt);
+
+    [shirtColorInput, shirtTextInput, textColorInput, textureSelect, shirtSize]
+        .forEach(el => el.addEventListener("input", drawShirt));
+    graphicSelect.addEventListener("change", drawShirt);
+    shirtType.addEventListener("change", drawShirt);
+
+    drawShirt();
+
+    /* Download PNG */
+    function downloadPNG() {
+        const link = document.createElement("a");
+        link.download = "design.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    }
+
+    /* Store & Cart */
+const productList = document.getElementById("productList");
+const cartItems = document.getElementById("cartItems");
+const cartTotal = document.getElementById("cartTotal");
+
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function getPrice() {
+        if (shirtType.value === "tshirt") return 25;
+        if (shirtType.value === "hoodie") return 40;
+        return 55;
+    }
+
+    document.getElementById("saveDesignBtn").addEventListener("click", () => {
+        const imageURL = canvas.toDataURL("image/png");
+
+    const product = {
+        id: Date.now(),
+        img: imageURL,
+        price: getPrice(),
+        size: shirtSize.value,
+        type: shirtType.value
+    };
+
+    products.push(product);
+    localStorage.setItem("products", JSON.stringify(products));
+
+    stats.designs++;
+    localStorage.setItem("stats", JSON.stringify(stats));
+    updateProfileUI();
+
+    renderProducts();
+    alert("Design saved to store!");
+    });
+
+    function renderProducts() {
+        productList.innerHTML = "";
+
+        products.forEach(p => {
+            const div = document.createElement("div");
+        div.className = "product";
+
+            const typeLabel = p.type === "tshirt" ? "T‑Shirt" :
+                              p.type === "hoodie" ? "Hoodie" : "Jacket";
+
+        div.innerHTML = `
+            <img src="${p.img}">
+            <div style="font-weight:600; margin-bottom:2px;">${typeLabel} (${p.size})</div>
+            <div style="color:#64748b; margin-bottom:6px;">$${p.price}</div>
+            <button class="btn-primary" style="width:100%;" onclick="addToCart(${p.id})">Add to Cart</button>
+        `;
+
+    productList.appendChild(div);
+    });
+    }
+
+    function addToCart(id) {
+        const product = products.find(p => p.id === id);
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+    }
+
+    function renderCart() {
+        cartItems.innerHTML = "";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            total += item.price;
+
+            const div = document.createElement("div");
+        div.className = "cart-item";
+
+            const typeLabel = item.type === "tshirt" ? "T‑Shirt" :
+                              item.type === "hoodie" ? "Hoodie" : "Jacket";
+
+        div.innerHTML = `
+            <div style="display:flex; align-items:center; gap:8px;">
+                <img src="${item.img}">
+                <div>
+                    <div style="font-size:13px;">${typeLabel} (${item.size})</div>
+                    <div style="font-size:11px; color:#64748b;">$${item.price}</div>
+                </div>
+            </div>
+            <button class="btn-danger" style="padding:6px 10px;" onclick="removeFromCart(${index})">X</button>
+        `;
+
+    cartItems.appendChild(div);
+    });
+
+    cartTotal.textContent = total.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+    }
+
+    renderProducts();
+    renderCart();
+
+    /* Checkout */
+    function openCheckout() {
+        if (!cart.length) return alert("Cart is empty");
+        document.getElementById("checkoutModal").style.display = "flex";
+    }
+
+    function closeCheckout() {
+        document.getElementById("checkoutModal").style.display = "none";
+    }
+
+    function completeOrder() {
+        const name = document.getElementById("checkoutName").value.trim();
+        const card = document.getElementById("checkoutCard").value.trim();
+        if (!name || !card) return alert("Enter name and card");
+
+        alert("Payment Successful! Order Completed.");
+        cart = [];
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+
+        stats.orders++;
+        localStorage.setItem("stats", JSON.stringify(stats));
+        updateProfileUI();
+
+        closeCheckout();
+    }
+</script>
+</body>
+</html>
