@@ -221,13 +221,14 @@ select:focus, input[type="color"]:focus {
 }
 
 /* Buttons */
-.btn-primary, .btn-ghost, .btn-danger {
-    padding: 9px 14px;
-    border-radius: 999px;
-    border: none;
-    font-size: 13px;
-    cursor: pointer;
-    font-weight: 500;
+background: var(--primary);
+            color: var(--light);
+            padding: 12px 22px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
 }
 .btn-primary {
     background: linear-gradient(135deg, #4a6cf7, #7b5cff);
@@ -310,8 +311,9 @@ select:focus, input[type="color"]:focus {
     backdrop-filter: blur(26px);
 }
 .modal-content h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
+   color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 28px;
 }
 .modal-content input {
     width: 100%;
